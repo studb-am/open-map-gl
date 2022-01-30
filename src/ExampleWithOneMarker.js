@@ -9,10 +9,29 @@ function ExampleWithOneMarker() {
 
     //test the ref property of the map
     useEffect(() => {
+        /*const mapParams = () => {
+            const center = _map.current.getCenter();
+            const zoom = _map.current.getZoom();
+            const bounds = _map.current.getBounds();
+
+            console.log('center', center);
+            console.log('zoom', zoom);
+            console.log('bounds', bounds);
+        }
+
+        mapParams();*/
+
         setTimeout(() => {
-            _map.current.flyTo([7,46],10);
-        }, 2000)
-    },[]);
+            _map.current.fitBounds([[7.05, 45.01],[6.97,44.97]],{ padding: 20 });
+        },2000)
+
+        /*setTimeout(() => {
+            _map.current.flyTo({
+                center:[7,46],
+                zoom: 10
+            });
+        }, 2000);*/
+    }, []);
 
     return (
         <div className="App">

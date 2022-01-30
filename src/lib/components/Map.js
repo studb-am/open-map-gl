@@ -14,6 +14,12 @@ const Map = (props, ref) => {
         mapStyle,
         navigationControl,
         onClick,
+        onDblClick,
+        onDragEnd,
+        onDataLoading,
+        onDataLoaded,
+        onDataError,
+        onDrag,
         mapContainerClassName,
         mapClassName,
         children
@@ -27,7 +33,7 @@ const Map = (props, ref) => {
     const [zoom] = useState(initialZoom);
 
     /**
-     * Section of action event
+     * Section of action events
      */
     useImperativeHandle(ref, () => {
         return {
@@ -42,19 +48,42 @@ const Map = (props, ref) => {
             },
             fitBounds: (bbox, options) => {
                 map.current.fitBounds(bbox, options);
+            },
+            getBounds: () => {
+                return map.current.getBounds();
+            },
+            getCenter:() => {
+                return map.current.getCenter();
+            },
+            getZoom: () => {
+                return map.current.getZoom();
+            },
+            onLoad: (callback) => {
+                map.current.on('load', callback)
+            },
+            loadImage: (url,callback) => {
+                map.current.loadImage(url,callback);
+            },
+            addImage: (id,image) => {
+                map.current.addImage(id,image);
             }
         }
     })
     //========================
 
     useLayoutEffect(() => {
+        console.log('here');
+        console.log(mapObjects.current);
         //if the map exists then I just remove all her objects, otherwise I initialize the map itself
         if (map.current) {
             //update block
+            /*
+            --da capire dopo aver visto i geojson come lavorare coi marker di nuovo
             mapObjects.current.map(mapObject => {
                 mapObject.remove();
             });
             mapObjects.current = []; //I'm re-initializing the array too
+            */
         } else {
             //initialization block
             map.current = new maplibregl.Map({
@@ -71,6 +100,24 @@ const Map = (props, ref) => {
             }
             if (onClick) {
                 map.current.on('click', onClick);
+            }
+            if (onDragEnd) {
+                map.current.on('dragend', onDragEnd);
+            }
+            if (onDrag) {
+                map.current.on('drag', onDrag);
+            }
+            if (onDataLoading) {
+                map.current.on('dataloading', onDataLoading);
+            }
+            if (onDataLoaded) {
+                map.current.on('data', onDataLoaded);
+            }
+            if (onDataError) {
+                map.current.on('error', onDataError);
+            }
+            if (onDblClick) {
+                map.current.on('dblclick', onDblClick);
             }
         }
         if (Array.isArray(children)) {
