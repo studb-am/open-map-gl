@@ -3,6 +3,7 @@ import {
     Map,
     GeojsonSource,
     SymbolLayer,
+    CircleLayer,
     usePngImage
 } from './lib';
 import MARKER_IMG from './assets/marker-b-32.png';
@@ -53,7 +54,22 @@ const DUMMY_POINTS = {
 };
 
 const Example = props => {
-    const [changeIcon, setChangeIcon] = useState(false);
+    const [index, setIndex] = useState(0);
+    const newData = {
+        type: 'FeatureCollection',
+        features: DUMMY_POINTS.features.map((point, currIndex) => {
+        if (currIndex === index) {
+            return {
+                ...point,
+                properties: {
+                    name: point.properties.name,
+                    isSelected: true
+                }
+            }
+        } else {
+            return point;
+        }
+    })};
     const _map = useRef();
     usePngImage(_map, 'custom-marker', MARKER_IMG);
     usePngImage(_map, 'custom-marker-2', 'https://maplibre.org/maplibre-gl-js-docs/assets/osgeo-logo.png');
@@ -69,14 +85,42 @@ const Example = props => {
         mapClassName="map"
         mapContainerClassName="map-wrap"
     >
-        <GeojsonSource
-            sourceId="sourcePoint"
-            data={DUMMY_POINTS}
+        {index>=0 && <GeojsonSource
+            id="sourcePoint"
+            data={newData}
         >
-            <SymbolLayer id="testPoint1" markerImageName={changeIcon ? 'custom-marker-2' : 'custom-marker'} />
-        </GeojsonSource>
+            {/*<SymbolLayer 
+                layerID="testPoint" 
+                sourceID="sourcePoint" 
+                layout={{
+                    'icon-image': 'custom-marker'
+                }}
+                filter={["==",'isSelected', true]}
+            />*/}
+            <CircleLayer 
+                layerID="testPoint" 
+                sourceID="sourcePoint"
+                paint= {{
+                    'circle-radius': 13,
+                    'circle-color': '#C42222'
+                    }} 
+                filter={["==",'isSelected', true]}
+            />
+            <CircleLayer 
+                layerID="testPoint2" 
+                sourceID="sourcePoint"
+                paint= {{
+                    'circle-radius': 10,
+                    'circle-color': '#B42222'
+                    }} 
+                filter={["!=",'isSelected', true]}
+            />
+        </GeojsonSource>}
     </Map>
-        <button style={{ position: 'absolute', top: 50, left: 50 }} onClick={() => setChangeIcon(prev => !prev)}>change icon</button>
+        <button style={{ position: 'absolute', top: 50, left: 50 }} onClick={() => setIndex(prev => {
+            const res = (prev+1) % 3;
+            return res
+        })}>change icon</button>
     </React.Fragment>
 }
 
