@@ -31,10 +31,13 @@ const Map = (props, ref) => {
      */
     useImperativeHandle(ref, () => {
         return {
-            flyTo: (center, zoom) => {
+            flyTo: ({center, zoom, speed, maxDuration, curve}) => {
                 map.current.flyTo({
                     center,
-                    zoom
+                    zoom,
+                    speed: speed || 1.2,
+                    curve: curve || 1.42,
+                    maxDuration
                 })
             }
         }

@@ -39,7 +39,22 @@ Below the properties that can be used with the Map Component:
 | children | React Components | This is the native property that comes with React and let us convert the map Compnent from a self closing Map tag to a tag container. Expected children are the elements of the map | *false* |
 
 #### Event functions
-In this section we are going to illustrate the methods that can be called by the map
+In this section we are going to illustrate the methods that can be called by the map. In order to use any of these map events, it's important to use the ref property above to point the map with a React ref variable (useRef hook):
+
+```
+import React { useRef } from 'react';
+import { Map } from 'open-map-gl';
+
+const App = () => {
+    const _map = useRef();
+
+    return <Map ref={_map}/>
+}
+```
+
+| **Event** | **Description** | **Example** |
+| --- | --- | --- |
+| FlyTo | When *flyTo* is invoked, then the map automatically flies to the specified position. FlyTo accepts two parameters:<ul><li>**center**, that is an array of coordinates, where the first one is the longitude, the second the latitude </li><li>**zoom**, the zoom index at which we want to migrate to the map</li>**speed**, the average speed of the animation, in relations with curve property. Default value 1.2<li>**curve**, it represents the zooming "curve" that occurs along the flight path. Default value 1.42</li></ul> | Basic usage: _map.current.flyTo({center: [7,46], zoom: 14})
 
 ### Marker Component
 #### Properties
