@@ -1,19 +1,19 @@
 {
-  "name": "openx-map-gl",
-  "version": "0.1.0",
-  "private": true,
+  "name": "open-map-gl",
+  "version": "0.0.2",
+  "private": false,
+  "description": "This is the react wrapper for MapLibre-gl that let's you use the js library by calling react components",
+  "author": "Giuseppe Susanna (aka studb25)",
+  "keywords": ["react","map","vector maps","open map"],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": ["dist", "README.md"],
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "maplibre-gl": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,5 +34,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/polyfill": "^7.12.1",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "web-vitals": "^2.1.4"
   }
 }

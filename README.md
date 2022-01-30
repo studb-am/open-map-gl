@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Open Map GL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This library is a wrapper for the maplibre GL one and help you use the javascript GL as react components. The benefits of this library is that you can use any open GL map (i.e. the ones created with TileServer-GL or MapTiler-GL) that generates the style.json and the tileserver.
 
-## Available Scripts
+For further details about MapLibre look at the following links:
+* [MapTiler, React, MapLibre integration](https://documentation.maptiler.com/hc/en-us/articles/4405444890897-How-to-display-MapLibre-GL-JS-map-using-React-JS)
+* [MapLibre API docs](https://maplibre.org/maplibre-gl-js-docs/api/map/)
 
-In the project directory, you can run:
+## Important Note
+Please keep in account that at the moment the package is under development/testing so not all the features are still available.
+This is just the beginning!
 
-### `npm start`
+## Before you start
+Please consider that in order to use mapLibre GL under the hood on your application, you need to copy and paste the following script tag below in the head tag of your index.html:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    <link href='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css' rel='stylesheet' />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Components
+At the moment there are only two components available as a pilot:
+* **Map**, that is the map Container and holds all the objects that can be used as a children
+* **Marker**, this is the first and the last step created at the moment and let's you shows one or more markers on the map itself 
 
-### `npm test`
+### Map Component
+#### Properties
+Below the properties that can be used with the Map Component:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| **Property** | **Type** | **Description** | **Required** |
+| --- | --- | --- | --- |
+| ref | reference Variable | This property is used in order to link the map itself with all the event that can be called by this variable as functions (for futher details on this please read the *Event functions* section below) | *false* |
+| centerCoords | object | This is the object of the center coordinates of the map. It is composed by **lat** (the latitude coordinates) and **lng** (the longitude coordinates) | *true* |
+| initialZoom | number | This is the initial value that we want to start the map with | *true* |
+| mapStyle | string | It's tje style Url where the gl server map style is located | *true* |
+| minZoom | number | It's the minimum level, in numbers, that the map is allowed to reach (if missing that the minimum is 1) | *false* |
+| maxZoom | number | It's the maximum level, in numbers, that the map is allowed to reach (if missing that the maximum is 20) | *false* |
+| mapClassName | string | It's the name of the class we want to associate to the map inside it's container. Note: please use a css to link to the file in order to define the properties of the class itself) | *false* |
+| mapContainerClassName | string | It's the name of the class we want to associate to the container of the map (the one that occupies the space in the browser page). Note: please use a css to link to the file in order to define the properties of the class itself) | *false* |
+| navigationControl | string | It represents the position of the navigation control on the map container. Possible values:<ul><li>**top-right**, when the navigation control is in the top right position of the screen</li><li>**top-left**, when the navigation control is in the top left position of the screen</li><li>**bottom-right**, when navigation control is in the bottom right position of the screen</li><li>**bottom-left**, when navigation control is in the top right position of the screen</li><li>**none**, when we don't want to show the navigation control. Default value is *none*</li></ul> | *false* |
+| onClick | function | This is a function that can be set and is fired once a user click on the map. It gives as default input the event with its properties. An example of the property is the lngLat, the object that contains latitude and longitude of the clicked coordinates on the map | *false* |
+| children | React Components | This is the native property that comes with React and let us convert the map Compnent from a self closing Map tag to a tag container. Expected children are the elements of the map | *false* |
 
-### `npm run build`
+#### Event functions
+In this section we are going to illustrate the methods that can be called by the map
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Marker Component
+#### Properties
+Below the properties that can be used with the Marker Component:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| **Property** | **Type** | **Description** | **Required** |
+| --- | --- | --- | --- |
+| coords | object | This object stores the coordinates center where the marker is shown. It is composed by **lat** (the latitude coordinates) and **lng** (the longitude coordinates) | *true* |
+| options | object | This contains all the options configuration of the marker. Possible values:<ul><li>**color**, represents the color of the marker itself</li><li>**draggable**, a boolean value that states if the marker can be draggable or not</li>
+| onDragEnd | function | This function is triggered once the user stops dragging the marker on the map. Note: please use this function only when options.draggable is *true* | *false* |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="right"><i>© studb25</i></p>
