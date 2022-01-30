@@ -39,6 +39,9 @@ const Map = (props, ref) => {
                     curve: curve || 1.42,
                     maxDuration
                 })
+            },
+            fitBounds: (bbox, options) => {
+                map.current.fitBounds(bbox, options);
             }
         }
     })

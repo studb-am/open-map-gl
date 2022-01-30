@@ -42,7 +42,7 @@ Below the properties that can be used with the Map Component:
 In this section we are going to illustrate the methods that can be called by the map. In order to use any of these map events, it's important to use the ref property above to point the map with a React ref variable (useRef hook):
 
 ```
-import React { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Map } from 'open-map-gl';
 
 const App = () => {
@@ -54,7 +54,8 @@ const App = () => {
 
 | **Event** | **Description** | **Example** |
 | --- | --- | --- |
-| FlyTo | When *flyTo* is invoked, then the map automatically flies to the specified position. FlyTo accepts two parameters:<ul><li>**center**, that is an array of coordinates, where the first one is the longitude, the second the latitude </li><li>**zoom**, the zoom index at which we want to migrate to the map</li>**speed**, the average speed of the animation, in relations with curve property. Default value 1.2<li>**curve**, it represents the zooming "curve" that occurs along the flight path. Default value 1.42</li></ul> | Basic usage: _map.current.flyTo({center: [7,46], zoom: 14})
+| FlyTo | When *flyTo* is invoked, then the map automatically flies to the specified position. FlyTo accepts two parameters:<ul><li>**center**, that is an array of coordinates, where the first one is the longitude, the second the latitude </li><li>**zoom**, the zoom index at which we want to migrate to the map</li>**speed**, the average speed of the animation, in relations with curve property. Default value 1.2<li>**curve**, it represents the zooming "curve" that occurs along the flight path. Default value 1.42</li></ul> | ```_map.current.flyTo({center: [7,46], zoom: 14})``` |
+| FitBounds | This property is similar with flyTo, but the difference is that we are not passing a center and a zoom, but a bounding box, so that center and zoom are retrieved under the hood. FitBounds accepts two params:<ul><li>**bbox**, that is an array of 2 coordinates (each is an array of longitude and latitude) respectively stating the top-left and bottom-right points</li><li>**options**, an array of properties, for example the *padding* that help creating a bbox with a padding that can be specified as a value, or as an object stating the bottom, top, left, right, as in the CSS property</li></ul> | ```_map.current.fitBounds([[7,45],[6,46]],{ padding: {top: 20, left: 20, right: 20, bottom: 20}})```|
 
 ### Marker Component
 #### Properties
