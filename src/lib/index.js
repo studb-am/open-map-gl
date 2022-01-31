@@ -1,15 +1,11 @@
-import Map from "./components/Map";
-import Marker from "./components/Marker";
-import GeojsonSource from './components/GeojsonSource';
-import SymbolLayer from "./components/SymbolLayer";
-import CircleLayer from './components/CircleLayer';
-import { usePngImage } from "./utils/usePngImage";
+import Map from "./components/map/map.component";
+import Marker from "./components/marker/marker.component";
+import GeojsonSource from "./components/source/source.geojson.component";
+import CircleLayer from "./components/layer/layer.circle.component";
 
 export {
-    Map, 
-    Marker, 
-    GeojsonSource, 
-    SymbolLayer,
-    CircleLayer,
-    usePngImage
-}
+    Map,
+    Marker,
+    GeojsonSource,
+    CircleLayer
+};
