@@ -83,6 +83,9 @@ const Example = props => {
             >
                 <CircleLayer
                     id='layer-circle'
+                    onDblClick={evt => {
+                        console.log(evt.features)
+                    }}
                     options={{
                         source: 'source-test',
                         filter: ['!=', 'isSelected', true],
