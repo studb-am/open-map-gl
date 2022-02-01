@@ -6,7 +6,7 @@ import {
     useRef
 } from "react";
 import { MapContext } from "../map/map.context";
-import { createLayer } from "./layer.functions";
+import { createLayer, updateLayer } from "./layer.functions";
 
 let layerCounter = 0;
 
@@ -80,9 +80,8 @@ const Layer = props => {
     ////****************************************/////
 
     if (currLayer) {
-        //update
+        updateLayer(mapRef, id, props, propsRef.current);
     }
-
     propsRef.current = props;
 
     return null;

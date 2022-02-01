@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Map, GeojsonSource, CircleLayer } from '../lib';
+import { Map, GeojsonSource, SymbolLayer, useImageIcon } from '../lib';
 
 const DUMMY_POINTS = {
     type: 'FeatureCollection',
@@ -59,6 +59,8 @@ const Example = props => {
         }, 2000);
     }, []);
 
+    useImageIcon(_map, 'test-icon', 'https://maplibre.org/maplibre-gl-js-docs/assets/osgeo-logo.png');
+
     return <Map
         ref={_map}
         navigationControl="top-right"
@@ -84,30 +86,12 @@ const Example = props => {
             id="source-test"
             data={DUMMY_POINTS}
         >
-            <CircleLayer
-                id='layer-circle'
+            <SymbolLayer 
+                id="symbol"
                 options={{
-                    source: 'source-test',
-                    filter: ['!=', 'isSelected', true],
-                    paint: {
-                        'circle-radius': 10,
-                        'circle-color': '#B42222'
-                    }
-                }}
-            />
-        </GeojsonSource>
-        <GeojsonSource
-            id="source-test-2"
-            data={DUMMY_POINTS}
-        >
-            <CircleLayer
-                id='layer-circle-2'
-                options={{
-                    source: 'source-test-2',
-                    filter: ['==', 'isSelected', true],
-                    paint: {
-                        'circle-radius': 10,
-                        'circle-color': '#B4FFFF'
+                    source: "source-test",
+                    layout: {
+                        'icon-image': 'test-icon'
                     }
                 }}
             />

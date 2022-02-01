@@ -30,6 +30,17 @@ export const updateLayer = (map, id, newProps, oldProps) => {
         }
     }
 
+    if (!jsonEquality(newOptions.paint, oldOptions.paint)) {
+        for (let key in newOptions.paint) {
+            map.current.setPaintProperty(id, key, newOptions.paint[key]);
+        }
+        for (let key in oldOptions.paint) {
+            if (!newOptions.paint.hasOwnProperty(key)) {
+                map.current.setPaintProperty(id, key, undefined);
+            }
+        }
+    }
+
 
     
 }
