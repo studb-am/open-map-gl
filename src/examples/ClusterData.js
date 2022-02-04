@@ -58,9 +58,7 @@ const Example = props => {
                 type="circle"
                 source="earthquakes"
                 filter={["has", "point_count"]}
-                onClick={evt => {
-                    console.log('clicked on cluster', evt)
-                }}
+                inspectClusterOnClick
                 paint={{
                     'circle-color': [
                         'step',
