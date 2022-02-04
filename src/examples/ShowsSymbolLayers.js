@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Map, GeojsonSource, SymbolLayer, useImageIcon } from '../lib';
+import { Map, Source, Layer, useImageIcon } from '../lib';
 
 const DUMMY_POINTS = {
     type: 'FeatureCollection',
@@ -59,7 +59,7 @@ const Example = props => {
         }, 2000);
     }, []);
 
-    useImageIcon(_map, 'test-icon', 'https://maplibre.org/maplibre-gl-js-docs/assets/osgeo-logo.png');
+    //useImageIcon(_map, 'test-icon', 'https://maplibre.org/maplibre-gl-js-docs/assets/osgeo-logo.png');
 
     return <Map
         ref={_map}
@@ -74,28 +74,26 @@ const Example = props => {
             width: '100%',
             height: 'calc(100vh - 77px)'
         }}
-        options={{
-            center: [7, 45],
-            zoom: 14,
-            minZoom: 9,
-            maxZoom: 16,
-            style: 'http://locomovolt.com:8080/styles/basic-preview/style.json'
-        }}
+        center={[7, 45]}
+        zoom={14}
+        minZoom={9}
+        style='http://locomovolt.com:8080/styles/basic-preview/style.json'
     >
-        <GeojsonSource
+        <Source
             id="source-test"
+            type="geojson"
             data={DUMMY_POINTS}
         >
-            <SymbolLayer 
+            <Layer 
                 id="symbol"
-                options={{
-                    source: "source-test",
-                    layout: {
-                        'icon-image': 'test-icon'
-                    }
-                }}
+                type="symbol"
+                source="source-test"
+                layout={{
+                    'icon-image': 'volleyball',
+                    'icon-size': 1.5
+                }}    
             />
-        </GeojsonSource>
+        </Source>
     </Map>
 
 }
