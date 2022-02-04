@@ -1,56 +1,17 @@
-import React, { useRef, useEffect } from 'react';
-import { Map, GeojsonSource, CircleLayer } from '../lib';
-
-const DUMMY_POINTS = {
-    type: 'FeatureCollection',
-    features: [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    7.77712493,
-                    45.039546962
-                ]
-            },
-            "properties": {
-                "name": "Pino Torinese",
-                "isSelected": true
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    7.684754261,
-                    45.000461393
-                ]
-            },
-            "properties": {
-                "name": "Moncalieri"
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    7.682489136,
-                    45.067755083
-                ]
-            },
-            "properties": {
-                "name": "Torino"
-            }
-        }
-    ]
-};
+import React, { useState, useRef, useEffect } from 'react';
+import { Map, Source, Layer } from '../lib';
 
 const Example = props => {
 
     const _map = useRef();
+    const [data, setData] = useState(null);
+
     useEffect(() => {
+        fetch('points.json')
+            .then(response => response.json())
+            .then(newData => setData(newData[0]))
+            .catch(err => console.error('Error on fetch', err.message));
+
         setTimeout(() => {
             _map.current.flyTo({
                 center: [7.7, 45],
@@ -59,61 +20,61 @@ const Example = props => {
         }, 2000);
     }, []);
 
-    return <Map
-        ref={_map}
-        navigationControl="top-right"
-        mapCssStyle={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-        }}
-        mapContainerCssStyle={{
-            position: 'relative',
-            width: '100%',
-            height: 'calc(100vh - 77px)'
-        }}
-        options={{
-            center: [7, 45],
-            zoom: 14,
-            minZoom: 9,
-            maxZoom: 16,
-            style: 'http://locomovolt.com:8080/styles/basic-preview/style.json'
-        }}
-    >
-        <GeojsonSource
-            id="source-test"
-            data={DUMMY_POINTS}
+    return <React.Fragment>
+        <Map
+            ref={_map}
+            navigationControl="top-right"
+            mapCssStyle={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+            }}
+            mapContainerCssStyle={{
+                position: 'relative',
+                width: '100%',
+                height: 'calc(100vh - 77px)'
+            }}
+            center={[7, 45]}
+            zoom={14}
+            minZoom={9}
+            maxZoom={16}
+            style='http://locomovolt.com:8080/styles/basic-preview/style.json'
         >
-            <CircleLayer
-                id='layer-circle'
-                options={{
-                    source: 'source-test',
-                    filter: ['!=', 'isSelected', true],
-                    paint: {
+            <Source
+                id="source-test"
+                type="geojson"
+                data={data}
+            >
+                <Layer
+                    id='layer-circle'
+                    type='circle'
+                    source='source-test'
+                    filter={['!=', 'isSelected', true]}
+                    paint={{
                         'circle-radius': 10,
                         'circle-color': '#B42222'
-                    }
-                }}
-            />
-        </GeojsonSource>
-        <GeojsonSource
-            id="source-test-2"
-            data={DUMMY_POINTS}
-        >
-            <CircleLayer
-                id='layer-circle-2'
-                options={{
-                    source: 'source-test-2',
-                    filter: ['==', 'isSelected', true],
-                    paint: {
+                    }}
+                />
+                <Layer
+                    id='layer-circle-2'
+                    type='circle'
+                    source='source-test'
+                    filter={['==', 'isSelected', true]}
+                    paint={{
                         'circle-radius': 10,
                         'circle-color': '#B4FFFF'
-                    }
-                }}
-            />
-        </GeojsonSource>
-    </Map>
-
+                    }}
+                />
+            </Source>
+        </Map>
+        <button style={{position: 'absolute', top: 100, left: 100}} onClick={() => {
+            const newData = {
+                type: "FeatureCollection",
+                features: [data.features[0]]
+            }
+            setData(newData);
+        }}>Change dataset</button>
+    </React.Fragment>
 }
 
 export default Example;

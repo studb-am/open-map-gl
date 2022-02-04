@@ -6,7 +6,8 @@ import './App.css';
 //import Example from './examples/ChangeSourceData';
 //import Example from './examples/DraggableMarker';
 //import Example from './examples/MarkerWithPopup';
-import Example from './examples/ShowsSymbolLayers';
+//import Example from './examples/ShowsSymbolLayers';
+import Example from './examples/ClusterData';
 
 function App() {
   return <div className="App">

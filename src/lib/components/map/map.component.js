@@ -9,12 +9,10 @@ import React, {
 import maplibregl from 'maplibre-gl';
 
 import { MapContext } from './map.context';
-import './Map.css';
 
 const Map = (props,ref) => {
 
     const {
-        options,
         onClick,
         onRightClick,
         onDblClick,
@@ -26,7 +24,8 @@ const Map = (props,ref) => {
         mapContainerCssStyle,
         mapCssStyle,
         navigationControl,
-        children
+        children,
+        ...options
     } = props;
 
     const [center] = useState(options.center);

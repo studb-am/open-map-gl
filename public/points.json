@@ -1,0 +1,47 @@
+[
+    {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        7.77712493,
+                        45.039546962
+                    ]
+                },
+                "properties": {
+                    "name": "Pino Torinese",
+                    "isSelected": true
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        7.684754261,
+                        45.000461393
+                    ]
+                },
+                "properties": {
+                    "name": "Moncalieri"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        7.682489136,
+                        45.067755083
+                    ]
+                },
+                "properties": {
+                    "name": "Torino"
+                }
+            }
+        ]
+    }
+]
