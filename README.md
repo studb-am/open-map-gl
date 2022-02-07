@@ -7,43 +7,60 @@ For further details about MapLibre look at the following links:
 * [MapLibre API docs](https://maplibre.org/maplibre-gl-js-docs/api/map/)
 
 ## Important Note
-Please keep in account that at the moment the package is under development/testing so not all the features are still available.
-This is just the beginning!
+Please keep in account that at the moment the package is under development/testing so some features might not be available.
 
 ## Before you start
 Please consider that in order to use mapLibre GL under the hood on your application, you need to copy and paste the following script tag below in the head tag of your index.html:
 
-    <link href='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css' rel='stylesheet' />
+```html
+<link href='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css' rel='stylesheet' />
+```
+
+## Table of contents
+* [Components](#components)
+* [Map](#map)
+    * [Properties](#properties)
 
 ## Components
-At the moment there are only two components available as a pilot:
+The library currently supports the following components:
 * **Map**, that is the map Container and holds all the objects that can be used as a children
-* **Marker**, this is the first and the last step created at the moment and let's you shows one or more markers on the map itself 
+* **Marker**, that let you show one or more markers on the map
+* **Popup**, that can be opened (or closed) on the map
+* **Source**, that let you load any type of source. Even though all the sources provided by maplibre are potentially available only the *geojson* one has currently been tested.
+* **Layer**, that shows graphically the data present in a source, i.e. a geojson source. Even though all the layers provided by maplibre are potentially available, only the *point* and *line* have currently been tested.
 
 ### Map Component
 #### Properties
 Below the properties that can be used with the Map Component:
 
-| **Property** | **Type** | **Description** | **Required** |
+| **Property** | **Type** | **Description** | **Default Values** |
 | --- | --- | --- | --- |
-| ref | reference Variable | This property is used in order to link the map itself with all the event that can be called by this variable as functions (for futher details on this please read the *Event functions* section below) | *false* |
-| centerCoords | object | This is the object of the center coordinates of the map. It is composed by **lat** (the latitude coordinates) and **lng** (the longitude coordinates) | *true* |
-| initialZoom | number | This is the initial value that we want to start the map with | *true* |
-| mapStyle | string | It's tje style Url where the gl server map style is located | *true* |
-| minZoom | number | It's the minimum level, in numbers, that the map is allowed to reach (if missing that the minimum is 1) | *false* |
-| maxZoom | number | It's the maximum level, in numbers, that the map is allowed to reach (if missing that the maximum is 20) | *false* |
-| mapClassName | string | It's the name of the class we want to associate to the map inside it's container. Note: please use a css to link to the file in order to define the properties of the class itself) | *false* |
-| mapContainerClassName | string | It's the name of the class we want to associate to the container of the map (the one that occupies the space in the browser page). Note: please use a css to link to the file in order to define the properties of the class itself) | *false* |
-| navigationControl | string | It represents the position of the navigation control on the map container. Possible values:<ul><li>**top-right**, when the navigation control is in the top right position of the screen</li><li>**top-left**, when the navigation control is in the top left position of the screen</li><li>**bottom-right**, when navigation control is in the bottom right position of the screen</li><li>**bottom-left**, when navigation control is in the top right position of the screen</li><li>**none**, when we don't want to show the navigation control. Default value is *none*</li></ul> | *false* |
-| onClick | function | This is a function that can be set and is fired once a user click on the map. It gives as default input the event with its properties. An example of the property is the lngLat, the object that contains latitude and longitude of the clicked coordinates on the map | *false* |
-| onDblClick | function | This function is fired when a double click action happens on the map. As a default, the function inherit the event coordinate of the click | *false*|
-| onDrag | function | This fuction is fired when the user drag the map | *false* |
-| onDragStart | function | This function is fired once the user start dragging the map | *false* |
-| onDragEnd | function | This function is fired once the user stop dragging the map | *false* |
-| onDataLoading | function | This function is fired whenever an element of the map (tile, data, style) starts loading or re-rendering | *false* |
-| onDataLoaded | fucntion | This function is fired once the loaded data have been loaded successfully | *false* |
-| onDataError | function | This function is fired once the data loading ends with errors | *false* |
-| children | React Components | This is the native property that comes with React and let us convert the map Compnent from a self closing Map tag to a tag container. Expected children are the elements of the map | *false* |
+| ref | reference Variable | This property is used in order to link the map itself with all the events that can be called by this variable as functions (for futher details on this please read the *Event functions* section below). If you want to use on or more methods of the map, this property is required to be set. | *null* |
+| minZoom | number | The minimum zoom level of the map (0-24). If not set, then the minimum zoom available is 0 | *0* |
+| maxZoom | number | The maximum zoom level of the map (0-24). If not set, then the maximum zoom available is 24 | *22* |
+| minPitch | number | The minimum pitch of the map (0-85). Values greater than 60 degrees are experimental and may result in rendering issues. If you encounter any, please raise an issue with details in the MapLibre project. | *0* |
+| maxPitch | number | The maximum pitch of the map (0-85). Values greater than 60 degrees are experimental and may result in rendering issues. If you encounter any, please raise an issue with details in the MapLibre project. | *60* |
+| interactive | boolean | If false, no mouse, touch, or keyboard listeners will be attached to the map, so it will not respond to interaction. | *true* |
+| bearingSnap | number | The threshold, measured in degrees, that determines when the map's bearing will snap to north. For example, with a bearingSnap of 7, if the user rotates the map within 7 degrees of north, the map will automatically snap to exact north. | *7* |
+| pitchWidthRotate | boolean | If false, the map's pitch (tilt) control with "drag to rotate" interaction will be disabled. | *true* |
+| clickTolerance | number | The max number of pixels a user can shift the mouse pointer during a click for it to be considered a valid click (as opposed to a mouse drag). | *3* |
+| attributionControl | boolean | If true, an AttributionControl will be added to the map. | *true* |
+| customAttribution | string (or array of strings) | String or strings to show in an AttributionControl . Only applicable if options.attributionControl is true. | *null* |
+| logoPosition | sting | A string representing the position of the MapLibre wordmark on the map. Valid options are top-left , top-right , bottom-left , bottom-right. | *bottom-left* |
+| refreshExpiredTiles | boolean | If false, the map won't attempt to re-request tiles once they expire per their HTTP cacheControl / expires headers. | *true* |
+| maxBounds | [LngLatBounds](https://maplibre.org/maplibre-gl-js-docs/api/geography/#lnglatboundslike) | If set, the map will be constrained to the given bounds. | *null* |
+| scrollZoom | boolean (or object) | If true, the "scroll to zoom" interaction is enabled. An Object value is passed as options to [ScrollZoomHandler#enable](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#scrollzoomhandler#enable). | *true* |
+| boxZoom | boolean | If true , the "box zoom" interaction is enabled (see [BoxZoomHandler](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#boxzoomhandler)). | *true* |
+| dragRotate | boolean | If true, the "drag to pan" interaction is enabled. An Object value is passed as options to [DragPanHandler#enable](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#dragpanhandler#enable). | *true* |
+| keyboard | boolean | If true, keyboard shortcuts are enabled (see [KeyboardHandler](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#keyboardhandler)). | *true* |
+| doubleClickZoom | boolean | If true, the "double click to zoom" interaction is enabled (see [DoubleClickZoomHandler](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#doubleclickzoomhandler)). | *true* |
+| touchZoomRotate | boolean | If true, the "pinch to rotate and zoom" interaction is enabled. An Object value is passed as options to [TouchZoomRotateHandler#enable](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#touchzoomrotatehandler#enable). | *true* |
+| touchPitch | boolean | If true, the "drag to pitch" interaction is enabled. An Object value is passed as options to [TouchPitchHandler#enable](https://maplibre.org/maplibre-gl-js-docs/api/handlers/#touchpitchhandler#enable). | *true* |
+| trackResize | boolean | If true, the map will automatically resize when the browser window resizes. | *true* |
+| center | [LngLatLike](https://maplibre.org/maplibre-gl-js-docs/api/geography/#lnglatlike) | The initial geographical centerpoint of the map. If center is not specified in the constructor options, MapLibre GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to [0, 0] Note: MapLibre GL uses longitude, latitude coordinate order (as opposed to latitude, longitude) to match GeoJSON. | *```[0,0]```* |
+| zoom | number | The initial zoom level of the map. If zoom is not specified in the constructor options, MapLibre GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to 0. | *0* |
+| bearing | number | The initial bearing (rotation) of the map, measured in degrees counter-clockwise from north. If bearing is not specified in the constructor options, MapLibre GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to 0. | *0* |
+| children | React Components | This is the native property that comes with React and let us convert the map Compnent from a self closing Map tag to a tag container. Expected children are the elements of the map | *undefined* |
 
 #### Map Methods
 In this section we are going to illustrate the methods that can be called by the map. In order to use any of these map events, it's important to use the ref property above to point the map with a React ref variable (useRef hook):

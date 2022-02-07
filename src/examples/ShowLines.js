@@ -28,7 +28,7 @@ const Example = props => {
         center={[9.14, 45.37]}
         zoom={12}
         minZoom={5}
-        style='http://locomovolt.com:8080/styles/basic-preview/style.json'
+        style='https://locomovolt.com/api/map/styles/basic-preview/style.json'
     >
         <Source
             id="source-test"
