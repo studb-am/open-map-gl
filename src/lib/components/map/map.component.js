@@ -21,6 +21,7 @@ const Map = (props,ref) => {
         onDrag, 
         onDragStart,
         onDragEnd,
+        accessToken,
         mapContainerCssStyle,
         mapCssStyle,
         navigationControl,
@@ -34,6 +35,12 @@ const Map = (props,ref) => {
     options.zoom = zoom;
     const mapContainer = useRef(null);
     const mapRef = useRef(null);
+
+    const addTokenToUrl = (url) => {
+        return {
+            url: `${url}?access_token=${accessToken}`
+        };
+    }
 
     //***************************Property to be used by the ref father once invoked*******************************************/
     useImperativeHandle(ref, () => {
@@ -162,9 +169,10 @@ const Map = (props,ref) => {
         if (mapRef.current) return;
         mapRef.current = new maplibregl.Map({
             ...options,
+            transformRequest: accessToken ? addTokenToUrl : null,
             container: mapContainer.current
         });
-        if (navigationControl !== "none") {
+        if (navigationControl !== "hidden") {
             mapRef.current.addControl(new maplibregl.NavigationControl(), navigationControl);
         }
     }, []);
