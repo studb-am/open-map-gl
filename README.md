@@ -115,6 +115,15 @@ const App = () => {
 ### Map Methods
 Map Methods are important in order to make actions from the map within the application code. In order to call map function it's required to provide a map with a reference (see the example above on how to use a ref hook). Methods available in this release:
 <details>
+<summary><b>addImage(id, image, options)</b></summary>
+<pre>Add an image to the style. This image can be displayed on the map like any other icon in the style's sprite using the image's ID with icon-image, background-pattern, fill-pattern, or line-pattern. A Map.event:error event will be fired if there is not enough space in the sprite to add this image.
+
+Parameters
+id(string)The ID of the image.
+image((HTMLImageElement | ImageBitmap | ImageData | {width: number, height: number, data: (Uint8Array | Uint8ClampedArray)} | StyleImageInterface))The image as an HTMLImageElement , ImageData , ImageBitmap or object with width , height , and data properties with the same format as ImageData .
+options(Partial<StyleImageMetadata>)(default {})Options object.</pre>
+</details>
+<details>
 <summary><b>fitBounds</b></summary>
 <pre>This is a test to see how it looks</pre>
 </details>
