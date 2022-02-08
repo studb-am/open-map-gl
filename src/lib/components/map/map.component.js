@@ -57,7 +57,7 @@ const Map = (props,ref) => {
             getContainer: () => mapRef.current.getContainer(),
             getFeatureState: (feature) => mapRef.current.getFeatureState(feature),
             getFilter: (layerId) =>  mapRef.current.getFilter(layerId),
-            getLayerId: (id) => mapRef.current.getLayerId(id),
+            getLayerId: (id) => mapRef.current.getLayer(id),
             getLayoutProperty: (layerId, name) => mapRef.current.getLayoutProperty(layerId, name),
             getLight: () => mapRef.current.getLight(), 
             getMaxBounds: () => mapRef.current.getMaxBounds(),

@@ -115,28 +115,72 @@ const App = () => {
 ### Map Methods
 Map Methods are important in order to make actions from the map within the application code. In order to call map function it's required to provide a map with a reference (see the example above on how to use a ref hook). Methods available in this release:
 <details>
-<summary><b>addImage(id, image, options)</b></summary>
-<pre>Add an image to the style. This image can be displayed on the map like any other icon in the style's sprite using the image's ID with icon-image, background-pattern, fill-pattern, or line-pattern. A Map.event:error event will be fired if there is not enough space in the sprite to add this image.
+<summary><b>flyTo(option, eventData?)</b></summary>
+<pre>Changes any combination of center, zoom, bearing, and pitch, animating the transition along a curve that evokes flight. The animation seamlessly incorporates zooming and panning to help the user maintain her bearings even after traversing a great distance.<br><br>
+Note: The animation will be skipped, and this will behave equivalently to jumpTo if the user has the reduced motion accesibility feature enabled in their operating system, unless 'options' includes essential: true.<br><br>
+Explaination of the parameters is available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#flyto-parameters'>maplibre doc</a>.
+</pre>
+</details>
 
-Parameters
-id(string)The ID of the image.
-image((HTMLImageElement | ImageBitmap | ImageData | {width: number, height: number, data: (Uint8Array | Uint8ClampedArray)} | StyleImageInterface))The image as an HTMLImageElement , ImageData , ImageBitmap or object with width , height , and data properties with the same format as ImageData .
-options(Partial<StyleImageMetadata>)(default {})Options object.</pre>
+```jsx
+import React, {useEffect} from 'react';
+...
+//after the renderization this is a demo to see how the camera flies to after two seconds of the map renderization
+useEffect(() => {
+    setTimeout(() => {
+        _map.current.flyTo({center: [0,0], zoom: 9});
+    }, 2000)
+}, []);
+```
+NOTE: for all the other examples you can follow the official guide of maplibre (please keep in account that you always need to link the map data with a ref hook).
+<details>
+<summary><b>fitBounds(bounds, options?, eventData?)</b></summary>
+<pre>Pans and zooms the map to contain its visible area within the specified geographical bounds. This function will also reset the map's bearing to 0 if bearing is nonzero. List of parameters are available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#fitbounds-parameters'>maplibre doc</a></pre>
 </details>
 <details>
-<summary><b>fitBounds</b></summary>
-<pre>This is a test to see how it looks</pre>
+<summary><b>fitScreenToCoordinates(p0, p1, bearing, options?, eventData?)</b></summary>
+<pre>Pans, rotates and zooms the map to to fit the box made by points p0 and p1 once the map is rotated to the specified bearing. To zoom without rotating, pass in the current map bearing. List of parameters are available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#fitscreencoordinates-parameters'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getBearing()</b></summary>
+<pre>Returns the map's current bearing. The bearing is the compass direction that is "up"; for example, a bearing of 90° orients the map so that east is up. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getbearing-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getBounds()</b></summary>
+<pre>Returns the map's geographical bounds. When the bearing or pitch is non-zero, the visible region is not an axis-aligned rectangle, and the result is the smallest bounds that encompasses the visible region. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getbounds-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getCanvas()</b></summary>
+<pre>Returns the map's canvas element. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvas-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getCanvasContainer()</b></summary>
+<pre>Returns the HTML element containing the map's canvas element.
+If you want to add non-GL overlays to the map, you should append them to this element.
+This is the element to which event bindings for map interactivity (such as panning and zooming) are attached. It will receive bubbled events from child elements such as the canvas, but not from map controls. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvascontainer-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getCenter()</b></summary>
+<pre>Returns the map's geographical centerpoint. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcenter-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getContainer()</b></summary>
+<pre>Returns the map's containing HTML element. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcontainer-returns'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getFilter(layerId)</b></summary>
+<pre>Returns the filter applied to the specified style layer. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getfilter-parameters'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getLayerId(id)</b></summary>
+<pre>Returns the layer with the specified ID in the map's style. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayer-parameters'>maplibre doc</a></pre>
+</details>
+<details>
+<summary><b>getLayoutProperty(layerId, name)</b></summary>
+<pre>Returns the value of a layout property in the specified style layer. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayoutproperty-parameters'>maplibre doc</a></pre>
 </details>
 
-| **Method** | **Description** | **Example** |
-| --- | --- | --- |
-| fitBounds | This property is similar with flyTo, but the difference is that we are not passing a center and a zoom, but a bounding box, so that center and zoom are retrieved under the hood. FitBounds accepts two params:<ul><li>**bbox**, that is an array of 2 coordinates (each is an array of longitude and latitude) respectively stating the north-east and south-west points</li><li>**options**, an array of properties, for example the *padding* that help creating a bbox with a padding that can be specified as a value, or as an object stating the bottom, top, left, right, as in the CSS property</li></ul> | ```_map.current.fitBounds([[7,45],[6,46]],{ padding: {top: 20, left: 20, right: 20, bottom: 20}})```|
-| flyTo | When *flyTo* is invoked, then the map automatically flies to the specified position. FlyTo accepts two parameters:<ul><li>**center**, that is an array of coordinates, where the first one is the longitude, the second the latitude </li><li>**zoom**, the zoom index at which we want to migrate to the map</li>**speed**, the average speed of the animation, in relations with curve property. Default value 1.2<li>**curve**, it represents the zooming "curve" that occurs along the flight path. Default value 1.42</li></ul> | ```_map.current.flyTo({center: [7,46], zoom: 14})``` |
-| getBounds | Returns a LngLat object with the 2 bounding box coordinates. The object has the property "_ne" and "_sw" (north-east and south-west). Each property is a LngLat object of coordinates, respectively with lng and lat props | ```const bounds = _map.current.getBounds();```
-| getCenter | Returns the LngLat object of center coordinates | ```const { lng, lat } = _map.current.getCenter();``` |
-| getZoom | Returns the number of the current zoom | ```const zoom = _map.current.getZoom();``` |
 
-For further details about LngLat object and all the methods associated, please have a look at [LngLat section](https://maplibre.org/maplibre-gl-js-docs/api/geography/#lnglat) in MapLibre GL Doc.
 
 ### Marker Component
 #### Properties
