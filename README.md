@@ -20,7 +20,7 @@ Please consider that in order to use mapLibre GL under the hood on your applicat
 * [Components](#components)
 * [Map](#map)
     * [Properties](#properties)
-    * [Map Usage](#map%20usage)
+    * [Map Usage](#map-usage)
 
 ## Components
 The library currently supports the following components:
