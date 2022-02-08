@@ -20,7 +20,7 @@ Please consider that in order to use mapLibre GL under the hood on your applicat
 * [Components](#components)
 * [Map](#map)
     * [Properties](#properties)
-    * [Map Usage](#map_usage)
+    * [Map Usage](#map%20usage)
 
 ## Components
 The library currently supports the following components:
@@ -63,9 +63,8 @@ Below the properties that can be used with the Map Component:
 | bearing | number | The initial bearing (rotation) of the map, measured in degrees counter-clockwise from north. If bearing is not specified in the constructor options, MapLibre GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to 0. | *`0`* |
 | pitch | number | The initial pitch (tilt) of the map, measured in degrees away from the plane of the screen (0-85). If pitch is not specified in the constructor options, MapLibre GL JS will look for it in the map's style object. If it is not specified in the style, either, it will default to 0. Values greater than 60 degrees are experimental and may result in rendering issues. If you encounter any, please raise an issue with details in the MapLibre project. | *`0`* |
 | bounds | [LngLatBounds](https://maplibre.org/maplibre-gl-js-docs/api/geography/#lnglatboundslike) | The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options. | 
-| fitBoundsOptions | A [Map#fitBounds](https://maplibre.org/maplibre-gl-js-docs/api/map/#map#fitbounds) options object to use only when fitting the initial bounds provided above. | *`<none>`* |
-| renderWorldCopies | boolean | If true, multiple copies of the world will be rendered side by side beyond -180 and 180 degrees longitude. If set to false:<ul><li>When the map is zoomed out far enough that a single representation of the world does not fill the map's entire container, there will be blank space beyond 180 and -180 degrees longitude.</li><li>Features that cross 180 and -180 degrees longitude will be cut in two (with one portion on the right edge of the
-map and the other on the left edge of the map) at every zoom level.</li></ul> | *`true`* |
+| fitBoundsOptions | object | A [Map#fitBounds](https://maplibre.org/maplibre-gl-js-docs/api/map/#map#fitbounds) options object to use only when fitting the initial bounds provided above. | *`<none>`* |
+| renderWorldCopies | boolean | If true, multiple copies of the world will be rendered side by side beyond -180 and 180 degrees longitude. If set to false:<ul><li>When the map is zoomed out far enough that a single representation of the world does not fill the map's entire container, there will be blank space beyond 180 and -180 degrees longitude.</li><li>Features that cross 180 and -180 degrees longitude will be cut in two (with one portion on the right edge of the map and the other on the left edge of the map) at every zoom level.</li></ul> | *`true`* |
 | maxTileSizeCache | number | The maximum number of tiles stored in the tile cache for a given source. If omitted, the cache will be dynamically sized based on the current viewport.| *`null`* |
 | localIdeographFontFamily | string | Defines a CSS font-family for locally overriding generation of glyphs in the 'CJK Unified Ideographs', 'Hiragana', 'Katakana' and 'Hangul Syllables' ranges. In these ranges, font settings from the map's style will be ignored, except for font-weight keywords (light/regular/medium/bold). Set to false , to enable font settings from the map's style for these glyph ranges. The purpose of this option is to avoid bandwidth-intensive glyph server requests. (See [Use locally generated ideographs](https://maplibre.org/maplibre-gl-js-docs/example/local-ideographs/)) | *sans-serif* |
 | collectResourceTiming | boolean | If true, Resource Timing API information will be collected for requests made by GeoJSON and Vector Tile web workers (this information is normally inaccessible from the main Javascript thread). Information will be returned in a resourceTiming property of relevant data events. | *`false`* |
