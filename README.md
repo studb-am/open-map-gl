@@ -21,6 +21,7 @@ Please consider that in order to use mapLibre GL under the hood on your applicat
 * [Map](#map)
     * [Properties](#properties)
     * [Map Usage](#map-usage)
+    * [Map Methods](#map-methods)
 
 ## Components
 The library currently supports the following components:
@@ -86,7 +87,7 @@ Below the properties that can be used with the Map Component:
 | onDragEnd | function | This property react once the map stops being dragged | *`<none>`* |
 | children | React Components | This is the native property that comes with React and let us convert the map Compnent from a self closing Map tag to a tag container. Expected children are the elements of the map | *`<none>`* |
 
-#### Map Usage
+### Map Usage
 In this section we are going to illustrate the methods that can be called by the map. In order to use any of these map events, it's important to use the ref property above to point the map with a React ref variable (useRef hook):
 
 ```jsx
@@ -111,6 +112,12 @@ const App = () => {
     />
 }
 ```
+### Map Methods
+Map Methods are important in order to make actions from the map within the application code. In order to call map function it's required to provide a map with a reference (see the example above on how to use a ref hook). Methods available in this release:
+<details>
+<summary><b>fitBounds</b></summary>
+<pre>This is a test to see how it looks</pre>
+</details>
 
 | **Method** | **Description** | **Example** |
 | --- | --- | --- |
