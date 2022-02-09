@@ -19,7 +19,7 @@ Please consider that in order to use mapLibre GL under the hood on your applicat
 ## Table of contents
 * [Components](#components)
 * [Map](#map)
-    * [Properties](#properties)
+    * [Properties](#map-properties)
     * [Map Usage](#map-usage)
     * [Map Methods](#map-methods)
 
@@ -76,7 +76,7 @@ Below the properties that can be used with the Map Component:
 | navigationControl | string | It represents the control used in order to zoom in, zoom out or rotate the map. Valid values to specify:<ul><li>top-left</li><li>top-right</li><li>bottom-left</li><li>bottom-right</li><li>hidden, once the navigation control is supposed to not be shown (this value is also the default one in case this property is not specified)</li> | *`hidden`* |
 | mapContainerCssStyle | object | In line style object where the needed css properties will be applied to the *div* that contains the map | *`null`* |
 | mapCssStyle | object | In line style object where the needed css properties will be applied to the *div* of the map | *`null`* |
-| accessToken | string | If your backend is configured to accept an accessToken, then it will be appended as GET request to query parameters. If not provided, then no token will be applied to the api calls | *`null`* |
+| accessToken | string | If your backend is configured to accept an accessToken, then it will be appended as GET request to query parameters (the variable to be used is `access_token`). If not provided, then no token will be applied to the api calls | *`null`* |
 | onClick | function | if valorized, this property will fire a function that will react to the click event. The property get as input function an event that stores several information for example the clicked location coordinates | *`<none>`* |
 | onRightClick | function | If valorized, this property will fire a function that will react to the right click event. The property get as input function an event that stores several information for example the clicked location coordinates | *`<none>`* |
 | onDblClick | function | If valorized, this property will fire a function that will react to the double click event. The property get as input function an event that stores several information for example the clicked location coordinates | *`<none>`* |
@@ -99,6 +99,8 @@ const App = () => {
 
     return <Map 
         ref={_map} 
+        style="..." //enter your style json here
+        accessToken="..." //use the access token only if your backend will require it: please remember that at the moment solution will manage only get requests
         mapCssStyle={{
             position: 'absolute',
             width: '100%',
@@ -197,8 +199,8 @@ useEffect(() => {
 
 
 
-### Marker Component
-#### Properties
+## Marker Component
+### Properties
 Below the properties that can be used with the Marker Component:
 
 | **Property** | **Type** | **Description** | **Required** |
