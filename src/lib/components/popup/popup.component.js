@@ -15,13 +15,13 @@ function getClassList(className) {
 const Popup = props => {
 
     const {
-        options,
         coords,
         text,
         html,
         children,
         onOpen,
-        onClose
+        onClose,
+        ...options
     } = props;
     const { mapRef } = useContext(MapContext);
     const popupPropsRef = useRef({ props });
@@ -30,7 +30,7 @@ const Popup = props => {
         return document.createElement('div');
     })
     const popup = useMemo(() => {
-        return new maplibregl.Popup(options).setLngLat(coords);
+        return new maplibregl.Popup(options).setLngLat(coords || [0,0]);
     }, []);
 
     useEffect(() => {

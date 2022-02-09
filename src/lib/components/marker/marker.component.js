@@ -10,13 +10,13 @@ import { MapContext } from "../map/map.context";
 const Marker = props => {
 
     const { 
-        options, 
         coords, 
         popup,
         children,
         onDrag,
         onDragEnd,
-        onDragStart 
+        onDragStart,
+        ...options, 
     } = props;
     const { mapRef } = useContext(MapContext);
     //const _marker = useRef();
@@ -33,7 +33,7 @@ const Marker = props => {
             element: hasChildren ? document.createElement('div') : null
         }
 
-        return new maplibregl.Marker(markerOptions).setLngLat(coords);
+        return new maplibregl.Marker(markerOptions).setLngLat(coords || [0,0]);
     }, []);
 
     useEffect(() => {

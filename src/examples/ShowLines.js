@@ -10,18 +10,6 @@ const DUMMY_LINES = {
 const Example = props => {
 
     const _map = useRef();
-    /*const { style, loading, error } = useMapToken(
-        'https://locomovolt.com/api/map/styles/basic-preview/style.json',
-        'abc'
-    );
-
-    if (loading) {
-        return <p>Loading...</p>
-    }
-
-    if (error) {
-        return <p>{error.message}</p>
-    }*/
 
     return <Map
         ref={_map}
