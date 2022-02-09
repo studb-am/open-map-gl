@@ -34,8 +34,7 @@ Please consider that in order to use mapLibre GL under the hood on your applicat
     * [Symbol](#symbol)
     * [Line](#line)
     * [Circle](#circle)
-    * [Fill](#fill)
-* [utilities](#utilities)
+* [Utilities](#utilities)
 
 ## Components Overview
 The library currently supports the following components:
