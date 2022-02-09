@@ -113,14 +113,7 @@ const App = () => {
 }
 ```
 ### Map Methods
-Map Methods are important in order to make actions from the map within the application code. In order to call map function it's required to provide a map with a reference (see the example above on how to use a ref hook). Methods available in this release:
-<details>
-<summary><b>flyTo(option, eventData?)</b></summary>
-<pre>Changes any combination of center, zoom, bearing, and pitch, animating the transition along a curve that evokes flight. The animation seamlessly incorporates zooming and panning to help the user maintain her bearings even after traversing a great distance.<br><br>
-Note: The animation will be skipped, and this will behave equivalently to jumpTo if the user has the reduced motion accesibility feature enabled in their operating system, unless 'options' includes essential: true.<br><br>
-Explaination of the parameters is available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#flyto-parameters'>maplibre doc</a>.
-</pre>
-</details>
+Map Methods are important in order to make actions from the map within the application code. In order to call map function it's required to provide a map with a reference (see the example above on how to use a ref hook). An example of how to use them:
 
 ```jsx
 import React, {useEffect} from 'react';
@@ -132,53 +125,75 @@ useEffect(() => {
     }, 2000)
 }, []);
 ```
-NOTE: for all the other examples you can follow the official guide of maplibre (please keep in account that you always need to link the map data with a ref hook).
-<details>
-<summary><b>fitBounds(bounds, options?, eventData?)</b></summary>
-<pre>Pans and zooms the map to contain its visible area within the specified geographical bounds. This function will also reset the map's bearing to 0 if bearing is nonzero. List of parameters are available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#fitbounds-parameters'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>fitScreenToCoordinates(p0, p1, bearing, options?, eventData?)</b></summary>
-<pre>Pans, rotates and zooms the map to to fit the box made by points p0 and p1 once the map is rotated to the specified bearing. To zoom without rotating, pass in the current map bearing. List of parameters are available at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#fitscreencoordinates-parameters'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getBearing()</b></summary>
-<pre>Returns the map's current bearing. The bearing is the compass direction that is "up"; for example, a bearing of 90° orients the map so that east is up. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getbearing-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getBounds()</b></summary>
-<pre>Returns the map's geographical bounds. When the bearing or pitch is non-zero, the visible region is not an axis-aligned rectangle, and the result is the smallest bounds that encompasses the visible region. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getbounds-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getCanvas()</b></summary>
-<pre>Returns the map's canvas element. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvas-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getCanvasContainer()</b></summary>
-<pre>Returns the HTML element containing the map's canvas element.
-If you want to add non-GL overlays to the map, you should append them to this element.
-This is the element to which event bindings for map interactivity (such as panning and zooming) are attached. It will receive bubbled events from child elements such as the canvas, but not from map controls. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvascontainer-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getCenter()</b></summary>
-<pre>Returns the map's geographical centerpoint. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcenter-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getContainer()</b></summary>
-<pre>Returns the map's containing HTML element. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getcontainer-returns'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getFilter(layerId)</b></summary>
-<pre>Returns the filter applied to the specified style layer. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getfilter-parameters'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getLayerId(id)</b></summary>
-<pre>Returns the layer with the specified ID in the map's style. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayer-parameters'>maplibre doc</a></pre>
-</details>
-<details>
-<summary><b>getLayoutProperty(layerId, name)</b></summary>
-<pre>Returns the value of a layout property in the specified style layer. Further details at the official <a href='https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayoutproperty-parameters'>maplibre doc</a></pre>
-</details>
+**Available methods**:
+* [flyTo(option, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#flyto-parameters)
+* [fitBounds(bounds, options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#fitbounds-parameters)
+* [fitScreenToCoordinates(p0, p1, bearing, options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#fitscreencoordinates-parameters)
+* [getBearing()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getbearing-returns)
+* [getBounds()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getbounds-returns)
+* [getCanvas()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvas-returns)
+* [getCanvasContainer()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getcanvascontainer-returns)
+* [getCenter()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getcenter-returns)
+* [getContainer()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getcontainer-returns)
+* [getFilter(layerId)](https://maplibre.org/maplibre-gl-js-docs/api/map/#getfilter-parameters)
+* [getLayer(id)](https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayer-parameters)
+* [getLayoutProperty(layerId, name)](https://maplibre.org/maplibre-gl-js-docs/api/map/#getlayoutproperty-parameters)
+* [getLight()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getlight-returns)
+* [getMaxBounds()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getmaxbounds-returns)
+* [getMaxPitch()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getmaxpitch-returns)
+* [getMaxZoom()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getmaxzoom-returns)
+* [getMinPitch()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getminpitch-returns)
+* [getMinZoom()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getminzoom-returns)
+* [getPadding()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getpadding-returns)
+* [getPaintProperty(layerId, name)](https://maplibre.org/maplibre-gl-js-docs/api/map/#getpaintproperty-parameters)
+* [getPitch()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getpitch-returns)
+* [getPixelRatio()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getpixelratio-returns)
+* [getRenderWorldCopies()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getrenderworldcopies-returns)
+* [getSource(id)](https://maplibre.org/maplibre-gl-js-docs/api/map/#getsource-parameters)
+* [getStyle()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getstyle-returns)
+* [getZoom()](https://maplibre.org/maplibre-gl-js-docs/api/map/#getzoom-returns)
+* [hasControl(control)](https://maplibre.org/maplibre-gl-js-docs/api/map/#hascontrol-parameters)
+* [hasImage(id)](https://maplibre.org/maplibre-gl-js-docs/api/map/#hasimage-parameters)
+* [isMoving()](https://maplibre.org/maplibre-gl-js-docs/api/map/#ismoving-returns)
+* [isRotating()](https://maplibre.org/maplibre-gl-js-docs/api/map/#isrotating-returns)
+* [isSourceLoaded(id)](https://maplibre.org/maplibre-gl-js-docs/api/map/#issourceloaded-parameters)
+* [isStyleLoaded()](https://maplibre.org/maplibre-gl-js-docs/api/map/#isstyleloaded-returns)
+* [isZooming()](https://maplibre.org/maplibre-gl-js-docs/api/map/#iszooming-returns)
+* [jumpTo(options, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#jumpto-parameters)
+* [listImages()](https://maplibre.org/maplibre-gl-js-docs/api/map/#listimages-returns)
+* [loaded()](https://maplibre.org/maplibre-gl-js-docs/api/map/#loaded-returns)
+* [moveLayer(id, beforeId?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#movelayer-parameters)
+* [panBy(offset, options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#panby-parameters)
+* [panTo(lngLat, options? eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#panto-parameters)
+* [project(lngLat)](https://maplibre.org/maplibre-gl-js-docs/api/map/#project-parameters)
+* [queryRenderedFeatures(geometry?, options?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#queryrenderedfeatures-parameters)
+* [querySourceFeatures(sourceId, parameters?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#querysourcefeatures-parameters)
+* [redraw()](https://maplibre.org/maplibre-gl-js-docs/api/map/#redraw-returns)
+* [resetNorth(options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#resetnorth-parameters)
+* [resetNorthPitch(options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#resetnorthpitch-parameters)
+* [resize(eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#resize-parameters)
+* [rotateTo(bearing, options?, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#rotateto-parameters)
+* [setBearing(bearing, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setbearing-parameters)
+* [setCenter(center, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setcenter-parameters)
+* [setFeatureState(feature, state)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setfeaturestate-parameters)
+* [setFilter(layerId, filter, options={})](https://maplibre.org/maplibre-gl-js-docs/api/map/#setfilter-parameters)
+* [setLayerZoomRange(layerId, minzoom, maxzoom)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setlayerzoomrange-parameters)
+* [setLayoutProperty(layerId, name, value, options={})](https://maplibre.org/maplibre-gl-js-docs/api/map/#setlayoutproperty-parameters)
+* [setLight(light, options={})](https://maplibre.org/maplibre-gl-js-docs/api/map/#setlight-parameters)
+* [setMaxBounds(bounds)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setmaxbounds-parameters)
+* [setMaxPitch(maxPitch)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setmaxpitch-parameters)
+* [setMaZoom(maxZoom)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setmaxzoom-parameters)
+* [setMinPitch(minPitch)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setminpitch-parameters)
+* [setMinZoom(minZoom)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setminzoom-parameters)
+* [setPadding(padding, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setpadding-parameters)
+* [setPaintProperty(layerId, name, value, options={})](https://maplibre.org/maplibre-gl-js-docs/api/map/#setpaintproperty-parameters)
+* [setPitch(pitch, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setpitch-parameters)
+* [setPixelRatio(pixelRatio)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setpixelratio-parameters)
+* [setStyle(style, options?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setstyle-parameters)
+* [setZoom(zoom, eventData?)](https://maplibre.org/maplibre-gl-js-docs/api/map/#setzoom-parameters)
+* [zoomIn(options?, eventData)](https://maplibre.org/maplibre-gl-js-docs/api/map/#zoomin-parameters)
+* [zoomOut(options?, eventData)](https://maplibre.org/maplibre-gl-js-docs/api/map/#zoomout-parameters)
+* [zoomTo(zoom, options?, eventData)](https://maplibre.org/maplibre-gl-js-docs/api/map/#zoomto-parameters)
 
 
 
