@@ -463,7 +463,7 @@ An usage example of the line:
 
 ```jsx
 import React from 'react';
-import { Map, Source, Layer } from '../lib';
+import { Map, Source, Layer } from 'open-map-gl';
 
 const DUMMY_LINES = { /*... your base here...*/ };
 

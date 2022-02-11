@@ -16,7 +16,7 @@ const Marker = props => {
         onDrag,
         onDragEnd,
         onDragStart,
-        ...options, 
+        ...options
     } = props;
     const { mapRef } = useContext(MapContext);
     //const _marker = useRef();

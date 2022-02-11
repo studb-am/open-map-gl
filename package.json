@@ -1,6 +1,6 @@
 {
   "name": "open-map-gl",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": false,
   "description": "This is the react wrapper for MapLibre-gl that let's you use the js library by calling react components",
   "author": "Giuseppe Susanna (aka studb25)",
